@@ -1,4 +1,4 @@
-package com.example.coinapp.view
+package com.example.coinapp.view.intro
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import com.example.coinapp.R
 import com.example.coinapp.databinding.FragmentIntro2Binding
+import com.example.coinapp.view.SelectActivity
 
 class IntroFragment2 : Fragment() {
 
