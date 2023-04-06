@@ -1,10 +1,19 @@
 package com.example.coinapp.view
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.coinapp.repository.NetWorkRepository
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class SelectViewModel : ViewModel() {
-    fun test() {
-        Timber.e("test")
+
+    private val netWorkRepository = NetWorkRepository()
+
+    // Coroutine
+    fun getCurrentCoinList() = viewModelScope.launch {
+        val result = netWorkRepository.getCurrentCoinList()
+
+        Timber.d(result.toString())
     }
 }
