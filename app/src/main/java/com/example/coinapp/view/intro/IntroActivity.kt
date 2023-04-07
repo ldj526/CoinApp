@@ -7,8 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import com.example.coinapp.MainActivity
-import com.example.coinapp.R
+import com.example.coinapp.view.main.MainActivity
 import com.example.coinapp.databinding.ActivityIntroBinding
 import timber.log.Timber
 
