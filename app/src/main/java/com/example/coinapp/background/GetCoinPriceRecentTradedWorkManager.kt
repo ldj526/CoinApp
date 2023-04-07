@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.coinapp.repository.DBRepository
+import com.example.coinapp.repository.NetWorkRepository
 import timber.log.Timber
 
 // 최근 거래된 코인 가격 내역 가져오기
@@ -14,9 +15,12 @@ class GetCoinPriceRecentTradedWorkManager(
 ) : CoroutineWorker(context, workerParameters) {
 
     private val dbRepository = DBRepository()
+    private val netWorkRepository = NetWorkRepository()
 
     override suspend fun doWork(): Result {
         Timber.d("doWork")
+
+        getAllInterestSelectedCoinData()
 
         return Result.success()
     }
@@ -27,7 +31,13 @@ class GetCoinPriceRecentTradedWorkManager(
         val selectedCoinList = dbRepository.getAllInterestSelectedCoinData()
 
         for (coinData in selectedCoinList) {
+
             Timber.d(coinData.toString())
+
+            // 관심있는 코인 각각의 가격 변동 정보 가져오기
+            val recentCoinPriceList = netWorkRepository.getInterestCoinPriceData(coinData.coin_name)
+
+            Timber.d(recentCoinPriceList.toString())
         }
     }
 
