@@ -66,9 +66,23 @@ class CoinListFragment : Fragment() {
         binding.selectedCoinRV.adapter = selectedRVAdapter
         binding.selectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
 
+        // 선택된 코인의 이미지를 찍었을 때
+        selectedRVAdapter.itemClick = object :CoinListRVAdapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+                Timber.d(selectedList[position].toString())
+            }
+        }
+
         val unSelectedRVAdapter = CoinListRVAdapter(requireContext(), unSelectedList)
         binding.unSelectedCoinRV.adapter = unSelectedRVAdapter
         binding.unSelectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
+
+        // 선택되지 않은 코인의 이미지를 찍었을 때
+        unSelectedRVAdapter.itemClick = object :CoinListRVAdapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+                Timber.d(unSelectedList[position].toString())
+            }
+        }
     }
 
     override fun onDestroy() {
