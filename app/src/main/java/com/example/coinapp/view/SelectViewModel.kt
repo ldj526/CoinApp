@@ -1,5 +1,7 @@
 package com.example.coinapp.view
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.datamodel.CurrentPrice
@@ -14,6 +16,11 @@ class SelectViewModel : ViewModel() {
     private val netWorkRepository = NetWorkRepository()
 
     private lateinit var currentPriceResultList: ArrayList<CurrentPriceResult>
+
+    // 데이터 변화를 관찰하는 LiveData
+    private val _currentPriceResult = MutableLiveData<List<CurrentPriceResult>>()
+    val currentPriceResult: LiveData<List<CurrentPriceResult>>
+        get() = _currentPriceResult
 
     // Coroutine
     fun getCurrentCoinList() = viewModelScope.launch {
@@ -37,5 +44,6 @@ class SelectViewModel : ViewModel() {
                 Timber.d(e.toString())
             }
         }
+        _currentPriceResult.value = currentPriceResultList
     }
 }
