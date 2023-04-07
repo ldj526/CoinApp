@@ -1,4 +1,4 @@
-package com.example.coinapp.datastore
+package com.example.coinapp.network.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore

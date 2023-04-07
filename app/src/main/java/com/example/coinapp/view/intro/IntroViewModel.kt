@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.coinapp.datastore.MyDataStore
+import com.example.coinapp.network.datastore.MyDataStore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber

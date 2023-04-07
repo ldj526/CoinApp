@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.datamodel.CurrentPrice
 import com.example.coinapp.datamodel.CurrentPriceResult
-import com.example.coinapp.datastore.MyDataStore
+import com.example.coinapp.network.datastore.MyDataStore
 import com.example.coinapp.db.entity.InterestCoinEntity
 import com.example.coinapp.repository.DBRepository
 import com.example.coinapp.repository.NetWorkRepository

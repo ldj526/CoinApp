@@ -3,6 +3,7 @@ package com.example.coinapp.repository
 import com.example.coinapp.App
 import com.example.coinapp.db.CoinPriceDatabase
 import com.example.coinapp.db.entity.InterestCoinEntity
+import com.example.coinapp.db.entity.SelectedCoinPriceEntity
 
 class DBRepository {
 
@@ -25,4 +26,12 @@ class DBRepository {
     // 관심있는 코인만 가져오기
     fun getAllInterestSelectedCoinData() = db.interestCoinDao().getSelectedData()
 
+
+    // CoinPrice
+    fun getAllCoinPriceData() = db.selectedCoinDao().getAllData()
+
+    fun insertCoinPriceData(selectedCoinPriceEntity: SelectedCoinPriceEntity) =
+        db.selectedCoinDao().insert(selectedCoinPriceEntity)
+
+    fun getOneSelectedCoinData(coinName: String) = db.selectedCoinDao().getOneCoinData(coinName)
 }
