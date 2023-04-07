@@ -1,23 +1,35 @@
 package com.example.coinapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.coinapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coinapp.databinding.ActivitySelectBinding
+import com.example.coinapp.view.adapter.SelectRVAdapter
 import timber.log.Timber
 
 class SelectActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySelectBinding
+
     private val viewModel: SelectViewModel by viewModels()
+
+    private lateinit var selectRVAdapter: SelectRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select)
+        binding = ActivitySelectBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel.getCurrentCoinList()
         // SelectActivity 에서 데이터 관찰
         viewModel.currentPriceResult.observe(this, Observer {
+            // Adapter 연결
+            selectRVAdapter = SelectRVAdapter(this, it)
+            binding.coinListRV.adapter = selectRVAdapter
+            binding.coinListRV.layoutManager = LinearLayoutManager(this)
+
             Timber.d(it.toString())
         })
     }
