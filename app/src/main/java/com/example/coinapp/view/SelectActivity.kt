@@ -1,10 +1,12 @@
 package com.example.coinapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coinapp.MainActivity
 import com.example.coinapp.databinding.ActivitySelectBinding
 import com.example.coinapp.view.adapter.SelectRVAdapter
 import timber.log.Timber
@@ -33,14 +35,17 @@ class SelectActivity : AppCompatActivity() {
             Timber.d(it.toString())
         })
 
-
-
-        // MainActivity 이동
         binding.laterTextArea.setOnClickListener {
             viewModel.setUpFirstFlag()
             viewModel.saveSelectedCoinList(selectRVAdapter.selectedCoinList)
-        //            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
         }
+
+        viewModel.save.observe(this, Observer {
+            // 데이터 선택이 "done" 됐을 때 MainActivity로 넘겨준다.
+            if(it.equals("done")){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 }

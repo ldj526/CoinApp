@@ -13,6 +13,7 @@ import com.example.coinapp.repository.NetWorkRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class SelectViewModel : ViewModel() {
@@ -26,6 +27,10 @@ class SelectViewModel : ViewModel() {
     private val _currentPriceResult = MutableLiveData<List<CurrentPriceResult>>()
     val currentPriceResult: LiveData<List<CurrentPriceResult>>
         get() = _currentPriceResult
+
+    private val _saved = MutableLiveData<String>()
+    val save: LiveData<String>
+        get() = _saved
 
     // Coroutine
     fun getCurrentCoinList() = viewModelScope.launch {
@@ -88,6 +93,10 @@ class SelectViewModel : ViewModel() {
                 interestCoinEntity.let {
                     dbRepository.insertInterestCoinData(it)
                 }
+            }
+            // Main쓰레드로 전환, withContext 가 끝날 때까지 Coroutine은 정지,
+            withContext(Dispatchers.Main) {
+                _saved.value = "done"
             }
         }
 }
