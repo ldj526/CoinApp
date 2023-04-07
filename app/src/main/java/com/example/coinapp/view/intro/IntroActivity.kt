@@ -36,6 +36,7 @@ class IntroActivity : AppCompatActivity() {
             } else {
                 // 처음 접속인 사용자
                 binding.fragmentContainerView.visibility = View.VISIBLE
+                binding.animationView.visibility = View.INVISIBLE
             }
         })
 

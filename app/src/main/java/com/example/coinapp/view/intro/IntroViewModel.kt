@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.datastore.MyDataStore
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -16,6 +17,9 @@ class IntroViewModel : ViewModel() {
         get() = _first
 
     fun checkFirstFlag() = viewModelScope.launch {
+        // animation delay
+        delay(2000)
+
         val getData = MyDataStore().getFirstData()
         _first.value = getData
         Timber.d(getData.toString())
